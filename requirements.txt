@@ -1,0 +1,11 @@
+numpy
+scipy
+matplotlib
+ipython
+shapely
+rft1d
+jupyter
+ipywidgets
+ipympl
+voila
+voici
