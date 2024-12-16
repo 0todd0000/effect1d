@@ -3,7 +3,7 @@ import ipywidgets as widgets
 from IPython.display import display, clear_output
 from traitlets import validate
 import matplotlib.pyplot as plt
-
+from . plt import Effect1DPlotParameters, Effect1DPlotter
 
 
 
@@ -29,22 +29,29 @@ class Header( widgets.HBox ):
 
 class MPLWidget( widgets.Stack ):
     def __init__(self):
-        import numpy as np
+        params  = Effect1DPlotParameters(n=5, d=1.0, w=20, dlim=(0.2,5), wlim=(3,50))
+        # import numpy as np
         self.out = widgets.Output()
         with self.out:
             self.fig = plt.figure()
             self.ax = self.fig.add_axes([0,0,1,1])
-            self.ax.plot( np.random.randn(10) )
+            self.plotter = Effect1DPlotter( self.ax )
+            self.plotter.update( params )
+            # self.ax.plot( np.random.randn(10) )
             plt.show( self.fig )
         super().__init__(  [self.out], selected_index=0  )
         
     
-    def update(self):
-        import numpy as np
+    def update(self, params, mgr):
+        # import numpy as np
         with self.out:
             clear_output(wait=True)
             self.ax.cla()
-            self.ax.plot( np.random.randn(5), "r" )
+            self.plotter = Effect1DPlotter( self.ax )
+            self.plotter.update( params )
+            
+            # self.plotter.update( params )
+            # self.ax.plot( np.random.randn(5), "r" )
             display(self.fig)
 
 

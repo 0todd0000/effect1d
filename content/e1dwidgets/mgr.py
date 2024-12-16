@@ -7,6 +7,7 @@ class CallbackManager( object ):
         self.print_messages = print_messages
         self.output_widget  = None
         self.results_widget = None
+        self.figure_widget  = None
 
     def _print(self, *args):
         if self.print_messages:
@@ -30,11 +31,17 @@ class CallbackManager( object ):
         self._print('FWHM changed', x)
 
     def on_groupsize_changed(self, n):
-        self._print('Group size changed', n)
+        # self._print('Group size changed', n)
+        params  = Effect1DPlotParameters(n=int(n), d=1.0, w=20, dlim=(0.2,5), wlim=(3,50))
+        self.figure_widget.update(params)
+        
     
     def on_wlimits_changed(self, lim):
         x0,x1 = lim
         self._print('FWHM limits changed', x0, x1)
+
+    def set_figure_widget(self, w):
+        self.figure_widget  = w
 
     def set_output_widget(self, w):
         self.output_widget  = w

@@ -9,16 +9,24 @@ from . basic import *
 
 class FigureWidget( widgets.HBox ):
     def __init__(self, mgr):
-        self.fig_widget = MPLWidget()
+        self.mgr        = mgr
+        self.mpl_widget = MPLWidget()
         self.slider_d   = SliderDLimits( mgr )
         self.slider_w   = SliderWLimits( mgr )
         layout_slider_d = widgets.Layout(display='flex', flex_flow='column', align_items='center', width='100%')
         layout_slider_w = widgets.Layout(display='flex', flex_flow='column', align_items='center', width='100%')
         layout_v        = widgets.Layout(display='flex', flex_flow='column', align_items='center', width='100%')
         hbox_slider_d   = widgets.HBox(children=[self.slider_d], layout=layout_slider_d)
-        vbox            = widgets.VBox(children=[self.fig_widget, hbox_slider_d], layout=layout_v)
-        layout = widgets.Layout(display='flex', flex_flow='row', align_items='center', width='100%')
+        vbox            = widgets.VBox(children=[self.mpl_widget, hbox_slider_d], layout=layout_v)
+        layout          = widgets.Layout(display='flex', flex_flow='row', align_items='center', width='100%')
         super().__init__(children=[self.slider_w, vbox],layout=layout)
+        self.mgr.set_figure_widget(self)
+        
+    def update(self, params):
+        self.mgr._print('update')
+        
+        self.mpl_widget.update( params, self.mgr )
+        
 
 
 
