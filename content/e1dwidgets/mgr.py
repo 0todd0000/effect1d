@@ -17,8 +17,8 @@ class CallbackManager( object ):
     
     def on_d_changed(self, x):
         self._print('d changed', x)
-        # self.results_widget.set_pvalue( '0.234' )
-        # self.results_widget.set_interpretation( 'Very big da yo' )
+        self.results_widget.set_pvalue( '0.234' )
+        self.results_widget.set_interpretation( 'Very big da yo' )
 
     def on_design_changed(self, x):
         self._print('design changed', x)
