@@ -57,7 +57,7 @@ class MPLWidget( widgets.Stack ):
         
         with self.out:
             # clear_output(wait=False)
-            self.out.clear_output( wait=False )
+            self.out.clear_output( wait=True )
             self.ax.cla()
             if self.basic:
                 import numpy as np
@@ -72,8 +72,12 @@ class MPLWidget( widgets.Stack ):
 class Output( widgets.Output ):
     def __init__(self, mgr):
         super().__init__()
+        self.observe(self.on_value_changed, names='value')
         self.mgr = mgr
         self.mgr.set_output_widget( self )
+        
+    def on_value_changed(self, change):
+        pass
 
 
 
