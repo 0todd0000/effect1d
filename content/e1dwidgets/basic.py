@@ -31,7 +31,8 @@ class MPLWidget( widgets.Stack ):
     def __init__(self):
         
         self.basic = True
-        
+        self.fig   = None
+        self.ax    = None
         
         
         self.out = widgets.Output()
@@ -63,6 +64,7 @@ class MPLWidget( widgets.Stack ):
             else:
                 self.plotter = Effect1DPlotter( self.ax )
                 self.plotter.update( params )
+            self.fig.canvas.draw()
             display(self.fig)
 
 
