@@ -1,9 +1,9 @@
 name: effect1d
 channels:
   - https://repo.mamba.pm/emscripten-forge
-  - conda-forge
 dependencies:
   - xeus-python
-  - numpy
-  - matplotlib
-  - ipywidgets
+  - pip:
+    - ipywidgets
+    - numpy
+    - matplotlib
