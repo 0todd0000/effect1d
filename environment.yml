@@ -5,9 +5,7 @@ channels:
 dependencies:
     - xeus-python
     - ipywidgets
-    - numpy==1.25.2
+    - numpy==1.26.4
     - matplotlib
-    - pygeos
-    - shapely
     - pip:
        - rft1d
