@@ -4,4 +4,6 @@ channels:
   - conda-forge
 dependencies:
   - xeus-python
+  - numpy
   - matplotlib
+  - ipywidgets
