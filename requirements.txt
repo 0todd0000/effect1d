@@ -2,8 +2,8 @@ numpy
 scipy
 matplotlib
 ipython
-shapely
 rft1d
+scikit-image
 jupyter
 ipywidgets
 ipympl
