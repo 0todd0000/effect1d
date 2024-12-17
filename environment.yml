@@ -6,7 +6,6 @@ dependencies:
     - xeus-python
     - ipywidgets
     - numpy==1.26.4
-    - scipy
     - matplotlib
     - scikit-image
     - pip:

@@ -4,7 +4,7 @@ import os
 from collections.abc import Iterable
 from math import atan2,degrees,floor
 import numpy as np
-from scipy import stats
+# from scipy import stats
 from matplotlib import pyplot as plt
 import matplotlib as mpl
 import rft1d
@@ -80,7 +80,8 @@ class Effect1DPlotter(object):
             return np.array( [self.d2p0d(dd, n)  for dd in d] )
         t = self.d2t(d, n)
         v = 2*n - 2
-        p = stats.t.sf(t, v)
+        # p = stats.t.sf(t, v)
+        p = rft1d.t.sf0d(t, v)
         return p
     
 
