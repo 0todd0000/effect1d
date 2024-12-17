@@ -56,7 +56,7 @@ class MPLWidget( widgets.Stack ):
     def update(self, params, mgr):
         
         with self.out:
-            clear_output(wait=True)
+            clear_output(wait=False)
             self.ax.cla()
             if self.basic:
                 import numpy as np
