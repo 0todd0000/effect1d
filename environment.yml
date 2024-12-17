@@ -8,5 +8,5 @@ dependencies:
     - numpy==1.26.4
     - matplotlib
     - pip:
-       - shapely==1.7.1
+       - shapely==1.6.3
        - rft1d
