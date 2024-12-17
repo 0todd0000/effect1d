@@ -30,7 +30,7 @@ class Header( widgets.HBox ):
 class MPLWidget( widgets.Stack ):
     def __init__(self):
         
-        self.basic = True
+        self.basic = False
         
         
         
@@ -43,11 +43,10 @@ class MPLWidget( widgets.Stack ):
                 import numpy as np
                 self.ax.plot( np.random.randn(10) )
             else:
-                pass
-                # from . plt import Effect1DPlotParameters, Effect1DPlotter
-                # params       = Effect1DPlotParameters(n=5, d=1.0, w=20, dlim=(0.2,5), wlim=(3,50))
-                # self.plotter = Effect1DPlotter( self.ax )
-                # self.plotter.update( params )
+                from . plt import Effect1DPlotParameters, Effect1DPlotter
+                params       = Effect1DPlotParameters(n=5, d=1.0, w=20, dlim=(0.2,5), wlim=(3,50))
+                self.plotter = Effect1DPlotter( self.ax )
+                self.plotter.update( params )
             
             plt.show( self.fig )
         super().__init__(  [self.out], selected_index=0  )
@@ -62,9 +61,8 @@ class MPLWidget( widgets.Stack ):
                 import numpy as np
                 self.ax.plot( np.random.randn(5), "r" )
             else:
-                pass
-                # self.plotter = Effect1DPlotter( self.ax )
-                # self.plotter.update( params )
+                self.plotter = Effect1DPlotter( self.ax )
+                self.plotter.update( params )
             display(self.fig)
 
 
