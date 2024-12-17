@@ -7,7 +7,7 @@ dependencies:
     - ipywidgets
     - numpy==1.26.4
     - matplotlib
+    - pygeos
+    - shapely
     - pip:
-       - pygeos
-       - shapely
        - rft1d
