@@ -1,10 +1,9 @@
-name: voici
+name: effect1d
 channels:
   - https://repo.mamba.pm/emscripten-forge
   - conda-forge
 dependencies:
-  - xeus-python
-  - bqplot
-  - matplotlib
-  - scipy
-  - shapely
+  - python == 3.12.7
+  - matplotlib == 3.9.3
+  - scipy == 1.14.1
+  - shapely == 2.0.6
