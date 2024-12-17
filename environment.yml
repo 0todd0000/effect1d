@@ -5,5 +5,5 @@ channels:
 dependencies:
     - xeus-python
     - ipywidgets
-    - numpy==1.26.4
+    - numpy
     - matplotlib
