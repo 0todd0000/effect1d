@@ -24,7 +24,6 @@ class FigureWidget( widgets.HBox ):
         
     def update(self, params):
         self.mgr._print('update')
-        
         self.mpl_widget.update( params, self.mgr )
         
 

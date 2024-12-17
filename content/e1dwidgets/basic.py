@@ -30,7 +30,7 @@ class Header( widgets.HBox ):
 class MPLWidget( widgets.Stack ):
     def __init__(self):
         
-        self.basic = False
+        self.basic = True
         
         
         
