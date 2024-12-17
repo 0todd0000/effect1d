@@ -12,7 +12,8 @@ class CallbackManager( object ):
     def _print(self, *args):
         if self.print_messages:
             with self.output_widget:
-                clear_output(wait=True)
+                # clear_output(wait=True)
+                self.output_widget.clear_output(wait=True)
                 print( *args )
     
     def on_d_changed(self, x):
