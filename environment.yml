@@ -4,6 +4,4 @@ channels:
   - conda-forge
 dependencies:
   - xeus-python
-  - bqplot
-  - numpy == 2.2.0
-  - matplotlib == 3.9.3
+  - matplotlib
