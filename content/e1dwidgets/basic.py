@@ -1,7 +1,7 @@
 
 import ipywidgets as widgets
 from IPython.display import display, clear_output
-from traitlets import validate
+# from traitlets import validate
 import matplotlib.pyplot as plt
 
 
@@ -43,10 +43,11 @@ class MPLWidget( widgets.Stack ):
                 import numpy as np
                 self.ax.plot( np.random.randn(10) )
             else:
-                from . plt import Effect1DPlotParameters, Effect1DPlotter
-                params       = Effect1DPlotParameters(n=5, d=1.0, w=20, dlim=(0.2,5), wlim=(3,50))
-                self.plotter = Effect1DPlotter( self.ax )
-                self.plotter.update( params )
+                pass
+                # from . plt import Effect1DPlotParameters, Effect1DPlotter
+                # params       = Effect1DPlotParameters(n=5, d=1.0, w=20, dlim=(0.2,5), wlim=(3,50))
+                # self.plotter = Effect1DPlotter( self.ax )
+                # self.plotter.update( params )
             
             plt.show( self.fig )
         super().__init__(  [self.out], selected_index=0  )
@@ -61,8 +62,9 @@ class MPLWidget( widgets.Stack ):
                 import numpy as np
                 self.ax.plot( np.random.randn(5), "r" )
             else:
-                self.plotter = Effect1DPlotter( self.ax )
-                self.plotter.update( params )
+                pass
+                # self.plotter = Effect1DPlotter( self.ax )
+                # self.plotter.update( params )
             display(self.fig)
 
 
@@ -75,17 +77,18 @@ class Output( widgets.Output ):
 
 
 class _EnforceSliderGap(object):
-    @validate('value')
-    def enforce_gap(self, proposal):
-        gap    = self.step
-        x0, x1 = proposal.value
-        oldx0, oldx1 = self.value
-        if (x1-x0) < gap:
-            if oldx0 == x0:
-                x1 = x0 + gap
-            else:
-                x0 = x1 - gap
-        return (x0, x1)
+    pass
+    # @validate('value')
+    # def enforce_gap(self, proposal):
+    #     gap    = self.step
+    #     x0, x1 = proposal.value
+    #     oldx0, oldx1 = self.value
+    #     if (x1-x0) < gap:
+    #         if oldx0 == x0:
+    #             x1 = x0 + gap
+    #         else:
+    #             x0 = x1 - gap
+    #     return (x0, x1)
 
 class SliderDLimits( widgets.FloatRangeSlider, _EnforceSliderGap ):
     def __init__(self, mgr):
