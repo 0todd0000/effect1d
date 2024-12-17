@@ -4,10 +4,9 @@ channels:
   - conda-forge
 dependencies:
   - xeus-python
-  - python == 3.12.7
-  - traitlets == 5.14.3
-  - numpy == 2.2.0
-  - scipy == 1.14.1
-  - matplotlib == 3.9.3
-  - shapely == 2.0.6
-  - rft1d == 0.2.4
+  - traitlets
+  - numpy
+  - scipy
+  - matplotlib
+  - shapely
+  - rft1d
