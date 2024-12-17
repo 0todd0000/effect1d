@@ -7,4 +7,5 @@ dependencies:
     - ipywidgets
     - numpy==1.26.4
     - matplotlib
-    - rft1d
+    - pip:
+       - rft1d
