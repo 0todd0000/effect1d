@@ -4,7 +4,7 @@ ipython
 rft1d
 scikit-image
 jupyter
-ipywidgets
-ipympl
+notebook
+mpl_interactions[jupyter]  # ipywidgets, ipympl
 voila
 voici

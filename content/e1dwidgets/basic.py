@@ -47,7 +47,8 @@ class MPLWidget( widgets.Image ):
         plt.savefig(b, format='png')
         b.seek(0)
         img = b.getvalue()
-        b.close()
+        # b.close()
+        self.fig.set_visible(False)
         
         super().__init__(value=img, format='png', border=None)
         
@@ -103,20 +104,28 @@ class MPLWidget( widgets.Image ):
     def update(self, params, mgr):
         mgr._print('MPLWidget.update', params, mgr)
 
-        self.ax.cla()
-        self.ax.plot( np.random.randn(5), "r" )
 
-        # self.fig.set_visible(True)
-        b = BytesIO()
-        plt.savefig(b, format='png')
-        b.seek(0)
-        img = b.getvalue()
-        b.close()
 
-        self.value = img
-
-        display(self)
         
+        
+        
+        # self.ax.cla()
+        # self.ax.plot( np.random.randn(5), "r" )
+
+
+        with self:
+            self.fig.set_visible(True)
+            b = BytesIO()
+            plt.savefig(b, format='png')
+            b.seek(0)
+            img = b.getvalue()
+            b.close()
+
+
+            self.value = img
+
+            # display(self)
+
         
         
         # if self.basic:
