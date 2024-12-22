@@ -7,7 +7,7 @@ dependencies:
     - ipywidgets
     - numpy==1.26.4
     - matplotlib
-    - mpl_interactions[jupyter]
     - scikit-image
     - pip:
        - rft1d
+       - mpl_interactions[jupyter]
