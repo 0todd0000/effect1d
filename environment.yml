@@ -10,4 +10,5 @@ dependencies:
     - scikit-image
     - pip:
        - rft1d
+       - ipympl
        - mpl_interactions[jupyter]
