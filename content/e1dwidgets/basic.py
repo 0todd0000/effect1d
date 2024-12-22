@@ -27,6 +27,12 @@ class Header( widgets.HBox ):
         super().__init__(children=[w], layout=layout)
 
 
+
+
+
+
+
+
 class MPLWidget( widgets.Image ):
     def __init__(self):
         
