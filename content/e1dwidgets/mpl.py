@@ -87,3 +87,15 @@ class MPLWidget( widgets.Box ):
 
 
         super().__init__(  [self.controls.vbox] )
+        
+        
+
+    def update(self, out):
+        with out:
+            print('aaaa')
+        
+        self.ax.cla()
+        self.ax.plot(  np.random.randn(11, 'ro')  )
+        # # plt.draw()
+        # self.fig.canvas.draw()
+        
