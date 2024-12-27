@@ -80,22 +80,25 @@ class MPLWidget( widgets.Box ):
         # self.ax.set_title(None)
         
 
-        def my_callback(a):
-            self.ax.set_xlim(0, 20)
-
-        self.controls.register_callback(my_callback, "x")
+        # def my_callback(a):
+        #     self.ax.set_xlim(0, 20)
+        #
+        # self.controls.register_callback(my_callback, "x")
 
 
         super().__init__(  [self.controls.vbox] )
         
         
 
+    def connect(self, fn, *args):
+        self.controls.register_callback(fn, *args)
+    
     def update(self, out):
-        with out:
-            print('aaaa')
+        # with out:
+        #     print('aaaa')
         
         self.ax.cla()
         self.ax.plot(  np.random.randn(11, 'ro')  )
-        # # plt.draw()
-        # self.fig.canvas.draw()
+        # plt.draw()
+        self.fig.canvas.draw()
         
