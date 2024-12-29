@@ -119,7 +119,15 @@ class MPLImageWidget( widgets.Image ):
         self.shape = 20,50
         a     = np.random.randn( *self.shape )
         self.ax.imshow( a )
-        img       = self.fig2img()
+        # img       = self.fig2img()
+        
+        b = BytesIO()
+        plt.savefig(b, format='png')
+        b.seek(0)
+        img = b.getvalue()
+        b.close()
+        
+        
         super().__init__(value=img, format='png', border=None, width=300)
         
         # self.a1   = np.random.randn( *shape )
@@ -130,29 +138,29 @@ class MPLImageWidget( widgets.Image ):
         
         
 
-    def fig2img(self):
-        b = BytesIO()
-        plt.savefig(b, format='png')
-        b.seek(0)
-        img = b.getvalue()
-        b.close()
-        return img
-    
-    
-    def set_image(self, a):
-        self.ax.cla()
-        self.ax.imshow( a )
-        self.value = self.fig2img()
-
-
-    # def connect(self, fn, *args):
-    #     self.controls.register_callback(fn, *args)
+    # def fig2img(self):
+    #     b = BytesIO()
+    #     plt.savefig(b, format='png')
+    #     b.seek(0)
+    #     img = b.getvalue()
+    #     b.close()
+    #     return img
     #
-    def update(self):
-        a = np.random.randn( *self.shape )
-        # with out:
-        #     print('aaaa')
-
-        self.set_image(  a  )
-        # plt.draw()
-        # self.fig.canvas.draw()
+    #
+    # def set_image(self, a):
+    #     self.ax.cla()
+    #     self.ax.imshow( a )
+    #     self.value = self.fig2img()
+    #
+    #
+    # # def connect(self, fn, *args):
+    # #     self.controls.register_callback(fn, *args)
+    # #
+    # def update(self):
+    #     a = np.random.randn( *self.shape )
+    #     # with out:
+    #     #     print('aaaa')
+    #
+    #     self.set_image(  a  )
+    #     # plt.draw()
+    #     # self.fig.canvas.draw()
