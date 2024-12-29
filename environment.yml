@@ -5,7 +5,7 @@ channels:
 dependencies:
     - xeus-python
     - ipywidgets==8.1.5
-    - numpy==2.2.1
+    - numpy==1.26.4
     - matplotlib
     - scikit-image
     - pip:
