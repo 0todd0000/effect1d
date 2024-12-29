@@ -2,5 +2,6 @@ name: build-env
 channels:
   - conda-forge
 dependencies:
+  - python==3.12
   - jupyterlite-xeus>=2.0.0,<3
   - voici_core>=0.7,<0.8
