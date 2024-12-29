@@ -1,0 +1,10 @@
+numpy
+matplotlib
+ipython
+rft1d
+scikit-image
+jupyter
+notebook
+voila
+voici
+
