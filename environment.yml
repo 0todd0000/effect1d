@@ -4,9 +4,9 @@ channels:
     - conda-forge
 dependencies:
     - xeus-python
-    - ipywidgets
+    - ipywidgets==8.1.5
     - numpy==1.26.4
-    - matplotlib
-    - scikit-image
+    - matplotlib==3.10.0
+    - scikit-image==0.25.0
     - pip:
-       - rft1d
+       - rft1d==0.2.3
