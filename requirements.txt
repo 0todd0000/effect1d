@@ -1,10 +1,10 @@
-numpy==1.26.4
-matplotlib==3.10.0
-ipython==8.31.0
-rft1d==0.2.3
-scikit-image==0.25.0
+numpy
+matplotlib
+ipython
+rft1d
+scikit-image
 jupyter
-notebook==7.3.2
-voila==0.5.8
+notebook
+voila
 voici
 

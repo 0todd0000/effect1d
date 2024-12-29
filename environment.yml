@@ -3,11 +3,10 @@ channels:
     - https://repo.mamba.pm/emscripten-forge
     - conda-forge
 dependencies:
-    - python==3.12
     - xeus-python
-    - ipywidgets==8.1.5
-    - numpy==1.26.4
-    - matplotlib==3.10.0
-    - scikit-image==0.25.0
+    - ipywidgets
+    - numpy
+    - matplotlib
+    - scikit-image
     - pip:
-       - rft1d==0.2.3
+       - rft1d
