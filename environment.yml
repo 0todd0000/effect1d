@@ -6,8 +6,8 @@ dependencies:
     - xeus-python
     - ipywidgets==8.1.5
     - numpy==2.2.1
-    - matplotlib==3.10.0
-    - scikit-image==0.25.0
     - pip:
+       - matplotlib==3.10.0
+       - scikit-image==0.25.0
        - rft1d==0.2.3
 
