@@ -5,10 +5,8 @@ channels:
 dependencies:
     - xeus-python
     - ipywidgets
-    - ipympl
-    - numpy==1.26.4
+    - numpy
     - matplotlib
     - scikit-image
     - pip:
        - rft1d
-       - mpl_interactions[jupyter]
