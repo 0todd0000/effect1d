@@ -51,6 +51,14 @@ class Header( widgets.HBox ):
 
 
 
+class Output( widgets.Output ):
+    def __init__(self, mgr):
+        super().__init__()
+        self.mgr  = mgr
+        self.mgr.set_output_widget( self )
+        
+    
+
 
 
 class SpinGroupSize( widgets.BoundedIntText ):
