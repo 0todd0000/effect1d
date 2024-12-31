@@ -1,10 +1,11 @@
-numpy
-matplotlib
-ipython
+numpy==1.26.4
+matplotlib==3.8.4
+ipython==8.30.0
 rft1d
-scikit-image
+scikit-image==0.19.3
 jupyter
+jupyterlab_widgets==3.0.13
+ipywidgets==8.1.5
 notebook
 voila
 voici
-
