@@ -7,19 +7,6 @@ import matplotlib.pyplot as plt
 
 
 
-
-class DropdownDesign( widgets.Dropdown ):
-    def __init__(self, mgr):
-        self.labels = ['One-sample', 'Paired', 'Two-sample']
-        super().__init__(options=self.labels, value='Two-sample', description='Design', disabled=False)
-        self.observe(self.on_value_changed, names='value')
-        self.mgr = mgr
-    
-    def on_value_changed(self, change):
-        ind = self.labels.index( change['new'] )
-        self.mgr.on_design_changed( ind )
-    
-
 class Header( widgets.HBox ):
     def __init__(self):
         s = '''
@@ -35,120 +22,29 @@ class Header( widgets.HBox ):
 
 
 
+class SpinGroupSize( widgets.BoundedIntText ):
+    def __init__(self, mgr):
+        super().__init__(value=8, min=3, max=40, step=1, description='Group size', disabled=False, layout=widgets.Layout(width='200px'),)
+        self.observe(self.on_value_changed, names='value')
+        self.mgr = mgr
+        
+    def on_value_changed(self, change):
+        n = change['new']
+        with out:
+            clear_output()
+            print( "n = ", n)
 
-
-class MPLWidget( widgets.Image ):
-    def __init__(self):
-        
-        self.basic = True
-        self.fig   = None
-        self.ax    = None
-        
-        
-        import base64
-        from io import BytesIO
-        import numpy as np
-
-        self.fig = plt.figure()
-        self.ax = self.fig.add_axes([0,0,1,1])
-        self.ax.plot( np.random.randn(10) )
-
-        b = BytesIO()
-        plt.savefig(b, format='png')
-        b.seek(0)
-        img = b.getvalue()
-        # b.close()
-        self.fig.set_visible(False)
-        
-        super().__init__(value=img, format='png', border=None)
-        
-        # self.fig.set_visible(False)
-        
-        
-
-        # # graphic = base64.b64encode(image_png)
-        # # graphic = graphic.decode('utf-8')
-        # # return graphic
-        #
-        #
-        # fpath = '/Users/todd/Dropbox/2019Sync/Documents/Professional/Jiku/Marketing/Logo/Blender/jiku-core-clean.png'
-        # with open(fpath, 'rb') as f:
-        #     img = f.read()
-        # super().__init__(value=img, format='png')
-        
-        
-        
-        # fpath = open("images/WidgetArch.png", "rb")
-        # img = file.read()
-        # widgets.Image(
-        #     value=image,
-        #     format='png',
-        #     width=300,
-        #     height=400,
-        # )
-        
-        
-        # self.fig = plt.figure()
-        #
-        # self.box = widgets.Box( [self.fig] )
-        #
-        # plt.show( self.fig )
-        
-        # with self.out:
-        #     self.fig = plt.figure()
-        #     self.ax = self.fig.add_axes([0,0,1,1])
-        #
-        #     if self.basic:
-        #         import numpy as np
-        #         self.ax.plot( np.random.randn(10) )
-        #     else:
-        #         from . plt import Effect1DPlotParameters, Effect1DPlotter
-        #         params       = Effect1DPlotParameters(n=5, d=1.0, w=20, dlim=(0.2,5), wlim=(3,50))
-        #         self.plotter = Effect1DPlotter( self.ax )
-        #         self.plotter.update( params )
-        #
-        #     plt.show( self.fig )
-        # super().__init__(  [self.out], selected_index=0  )
-        
-    
-    def update(self, params, mgr):
-        mgr._print('MPLWidget.update', params, mgr)
+        fpath = f'img/contours_n={n}.png'
+        with open(fpath, 'rb') as f:
+            img = f.read()
+        w.value = img
+        # self.mgr.on_groupsize_changed( change['new'] )
 
 
 
-        
-        
-        
-        # self.ax.cla()
-        # self.ax.plot( np.random.randn(5), "r" )
 
-
-        with self:
-            self.fig.set_visible(True)
-            b = BytesIO()
-            plt.savefig(b, format='png')
-            b.seek(0)
-            img = b.getvalue()
-            b.close()
-
-
-            self.value = img
-
-            # display(self)
-
-        
-        
-        # if self.basic:
-        #     import numpy as np
-        #
-        # else:
-        #     self.plotter = Effect1DPlotter( self.ax )
-        #     self.plotter.update( params )
-        # self.fig.canvas.draw()
-        # display(self.fig)
-
-
-# class MPLWidget( widgets.Stack ):
+#
+# class MPLWidget( widgets.Image ):
 #     def __init__(self):
 #
 #         self.basic = True
@@ -156,38 +52,108 @@ class MPLWidget( widgets.Image ):
 #         self.ax    = None
 #
 #
-#         self.out = widgets.Output()
-#         with self.out:
-#             self.fig = plt.figure()
-#             self.ax = self.fig.add_axes([0,0,1,1])
+#         import base64
+#         from io import BytesIO
+#         import numpy as np
 #
-#             if self.basic:
-#                 import numpy as np
-#                 self.ax.plot( np.random.randn(10) )
-#             else:
-#                 from . plt import Effect1DPlotParameters, Effect1DPlotter
-#                 params       = Effect1DPlotParameters(n=5, d=1.0, w=20, dlim=(0.2,5), wlim=(3,50))
-#                 self.plotter = Effect1DPlotter( self.ax )
-#                 self.plotter.update( params )
+#         self.fig = plt.figure()
+#         self.ax = self.fig.add_axes([0,0,1,1])
+#         self.ax.plot( np.random.randn(10) )
 #
-#             plt.show( self.fig )
-#         super().__init__(  [self.out], selected_index=0  )
+#         b = BytesIO()
+#         plt.savefig(b, format='png')
+#         b.seek(0)
+#         img = b.getvalue()
+#         # b.close()
+#         self.fig.set_visible(False)
+#
+#         super().__init__(value=img, format='png', border=None)
+#
+#         # self.fig.set_visible(False)
+#
+#
+#
+#         # # graphic = base64.b64encode(image_png)
+#         # # graphic = graphic.decode('utf-8')
+#         # # return graphic
+#         #
+#         #
+#         # fpath = '/Users/todd/Dropbox/2019Sync/Documents/Professional/Jiku/Marketing/Logo/Blender/jiku-core-clean.png'
+#         # with open(fpath, 'rb') as f:
+#         #     img = f.read()
+#         # super().__init__(value=img, format='png')
+#
+#
+#
+#         # fpath = open("images/WidgetArch.png", "rb")
+#         # img = file.read()
+#         # widgets.Image(
+#         #     value=image,
+#         #     format='png',
+#         #     width=300,
+#         #     height=400,
+#         # )
+#
+#
+#         # self.fig = plt.figure()
+#         #
+#         # self.box = widgets.Box( [self.fig] )
+#         #
+#         # plt.show( self.fig )
+#
+#         # with self.out:
+#         #     self.fig = plt.figure()
+#         #     self.ax = self.fig.add_axes([0,0,1,1])
+#         #
+#         #     if self.basic:
+#         #         import numpy as np
+#         #         self.ax.plot( np.random.randn(10) )
+#         #     else:
+#         #         from . plt import Effect1DPlotParameters, Effect1DPlotter
+#         #         params       = Effect1DPlotParameters(n=5, d=1.0, w=20, dlim=(0.2,5), wlim=(3,50))
+#         #         self.plotter = Effect1DPlotter( self.ax )
+#         #         self.plotter.update( params )
+#         #
+#         #     plt.show( self.fig )
+#         # super().__init__(  [self.out], selected_index=0  )
 #
 #
 #     def update(self, params, mgr):
+#         mgr._print('MPLWidget.update', params, mgr)
 #
-#         with self.out:
-#             # clear_output(wait=False)
-#             self.out.clear_output( wait=True )
-#             self.ax.cla()
-#             if self.basic:
-#                 import numpy as np
-#                 self.ax.plot( np.random.randn(5), "r" )
-#             else:
-#                 self.plotter = Effect1DPlotter( self.ax )
-#                 self.plotter.update( params )
-#             self.fig.canvas.draw()
-#             display(self.fig)
+#
+#
+#
+#
+#
+#         # self.ax.cla()
+#         # self.ax.plot( np.random.randn(5), "r" )
+#
+#
+#         with self:
+#             self.fig.set_visible(True)
+#             b = BytesIO()
+#             plt.savefig(b, format='png')
+#             b.seek(0)
+#             img = b.getvalue()
+#             b.close()
+#
+#
+#             self.value = img
+#
+#             # display(self)
+#
+#
+#
+#         # if self.basic:
+#         #     import numpy as np
+#         #
+#         # else:
+#         #     self.plotter = Effect1DPlotter( self.ax )
+#         #     self.plotter.update( params )
+#         # self.fig.canvas.draw()
+#         # display(self.fig)
+
 
 
 class Output( widgets.Output ):
