@@ -2,12 +2,12 @@
 import ipywidgets as widgets
 from IPython.display import display, clear_output
 # from traitlets import validate
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 
 
 
-class Header( widgets.HBox ):
+class AppHeader( widgets.HBox ):
     def __init__(self):
         s = '''
         <h1 style="text-align:center;">Effect Size Interpretation Calculator</h1>
@@ -18,27 +18,31 @@ class Header( widgets.HBox ):
         super().__init__(children=[w], layout=layout)
 
 
+class Header( widgets.HBox ):
+    def __init__(self, label):
+        w        = widgets.HTML(value=f'<h3>{label}</h3>', placeholder='', description='')
+        layout   = widgets.Layout(display='flex', flex_flow='column', align_items='center')
+        super().__init__(children=[w], layout=layout)
 
 
 
-
-class SpinGroupSize( widgets.BoundedIntText ):
-    def __init__(self, mgr):
-        super().__init__(value=8, min=3, max=40, step=1, description='Group size', disabled=False, layout=widgets.Layout(width='200px'),)
-        self.observe(self.on_value_changed, names='value')
-        self.mgr = mgr
-        
-    def on_value_changed(self, change):
-        n = change['new']
-        with out:
-            clear_output()
-            print( "n = ", n)
-
-        fpath = f'img/contours_n={n}.png'
-        with open(fpath, 'rb') as f:
-            img = f.read()
-        w.value = img
-        # self.mgr.on_groupsize_changed( change['new'] )
+# class SpinGroupSize( widgets.BoundedIntText ):
+#     def __init__(self, mgr):
+#         super().__init__(value=8, min=3, max=40, step=1, description='Group size', disabled=False, layout=widgets.Layout(width='200px'),)
+#         self.observe(self.on_value_changed, names='value')
+#         self.mgr = mgr
+#
+#     def on_value_changed(self, change):
+#         n = change['new']
+#         with out:
+#             clear_output()
+#             print( "n = ", n)
+#
+#         fpath = f'img/contours_n={n}.png'
+#         with open(fpath, 'rb') as f:
+#             img = f.read()
+#         w.value = img
+#         # self.mgr.on_groupsize_changed( change['new'] )
 
 
 
@@ -162,7 +166,7 @@ class Output( widgets.Output ):
         self.observe(self.on_value_changed, names='value')
         self.mgr = mgr
         self.mgr.set_output_widget( self )
-        
+
     def on_value_changed(self, change):
         pass
 
@@ -182,27 +186,27 @@ class _EnforceSliderGap(object):
     #             x0 = x1 - gap
     #     return (x0, x1)
 
-class SliderDLimits( widgets.FloatRangeSlider, _EnforceSliderGap ):
-    def __init__(self, mgr):
-        self.step = 0.1
-        super().__init__(value=[0.1, 4], min=0, max=10, step=self.step, description='d limits:', disabled=False, continuous_update=False, orientation='horizontal', readout=True, readout_format='.1f', layout=widgets.Layout(width='500px') )
-        self.observe(self.on_value_changed, names='value')
-        self.mgr = mgr
-    
-    def on_value_changed(self, change):
-        self.mgr.on_dlimits_changed( change['new'] )
-        
-
-
-class SliderWLimits( widgets.IntRangeSlider, _EnforceSliderGap ):
-    def __init__(self, mgr):
-        self.step = 1
-        super().__init__(value=[5, 50], min=3, max=80, step=self.step, description='FWHM limits:', disabled=False, continuous_update=False, orientation='vertical', readout=True, readout_format='d', layout=widgets.Layout(width='100px', height='400px'))
-        self.observe(self.on_value_changed, names='value')
-        self.mgr = mgr
-    
-    def on_value_changed(self, change):
-        self.mgr.on_wlimits_changed( change['new'] )
+# class SliderDLimits( widgets.FloatRangeSlider, _EnforceSliderGap ):
+#     def __init__(self, mgr):
+#         self.step = 0.1
+#         super().__init__(value=[0.1, 4], min=0, max=10, step=self.step, description='d limits:', disabled=False, continuous_update=False, orientation='horizontal', readout=True, readout_format='.1f', layout=widgets.Layout(width='500px') )
+#         self.observe(self.on_value_changed, names='value')
+#         self.mgr = mgr
+#
+#     def on_value_changed(self, change):
+#         self.mgr.on_dlimits_changed( change['new'] )
+#
+#
+#
+# class SliderWLimits( widgets.IntRangeSlider, _EnforceSliderGap ):
+#     def __init__(self, mgr):
+#         self.step = 1
+#         super().__init__(value=[5, 50], min=3, max=80, step=self.step, description='FWHM limits:', disabled=False, continuous_update=False, orientation='vertical', readout=True, readout_format='d', layout=widgets.Layout(width='100px', height='400px'))
+#         self.observe(self.on_value_changed, names='value')
+#         self.mgr = mgr
+#
+#     def on_value_changed(self, change):
+#         self.mgr.on_wlimits_changed( change['new'] )
 
 
 
@@ -211,7 +215,7 @@ class SpinGroupSize( widgets.BoundedIntText ):
         super().__init__(value=10, min=3, max=1000, step=1, description='Group size', disabled=False, layout=widgets.Layout(width='200px'),)
         self.observe(self.on_value_changed, names='value')
         self.mgr = mgr
-        
+
     def on_value_changed(self, change):
         self.mgr.on_groupsize_changed( change['new'] )
 
@@ -222,10 +226,10 @@ class SpinFWHM( widgets.BoundedFloatText ):
         super().__init__(value=10, min=3, max=80, step=0.1, description='FWHM', disabled=False, layout=widgets.Layout(width='200px'),)
         self.observe(self.on_value_changed, names='value')
         self.mgr = mgr
-        
+
     def on_value_changed(self, change):
         self.mgr.on_fwhm_changed( change['new'] )
-        
+
 
 
 class SpinCohensD( widgets.BoundedFloatText ):
@@ -233,7 +237,7 @@ class SpinCohensD( widgets.BoundedFloatText ):
         super().__init__(value=0.5, min=0.1, max=5, step=0.1, description="Cohen's d", disabled=False, layout=widgets.Layout(width='200px'),)
         self.observe(self.on_value_changed, names='value')
         self.mgr = mgr
-        
+
     def on_value_changed(self, change):
         self.mgr.on_d_changed( change['new'] )
 
@@ -241,5 +245,5 @@ class SpinCohensD( widgets.BoundedFloatText ):
 class ResultsTextBox( widgets.Text ):
     def __init__(self, label):
         super().__init__(value='(None)', placeholder='', description=label, disabled=True, layout = widgets.Layout(width='200px'))
-        
+
 
