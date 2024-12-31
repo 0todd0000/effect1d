@@ -43,7 +43,7 @@ class Header( widgets.HBox ):
 #             img = f.read()
 #         w.value = img
 #         # self.mgr.on_groupsize_changed( change['new'] )
-
+#
 
 
 
