@@ -21,8 +21,12 @@ class DropdownDesign( widgets.Dropdown ):
     
 
 class Header( widgets.HBox ):
-    def __init__(self, label):
-        w        = widgets.HTML(value=f'<h3>{label}</h3>', placeholder='', description='')
+    def __init__(self):
+        s = '''
+        <h1 style="text-align:center;">Effect Size Interpretation Calculator</h1>
+        <h3 style="text-align:center;">One-dimensional functional data, two-sample case</h3>
+        '''
+        w        = widgets.HTML(value=s, placeholder='', description='')
         layout   = widgets.Layout(display='flex', flex_flow='column', align_items='center')
         super().__init__(children=[w], layout=layout)
 

@@ -3,7 +3,9 @@
 # from . widgets import FigureWidget, ResultsWidget, DesignWidget, ControlsWidget
 # from . mgr import CallbackManager
 #
-from . mpl import MPLImageWidget
+# from . mpl import MPLImageWidget
+
+from . basic import Header
 
 
 # import ipywidgets as widgets
