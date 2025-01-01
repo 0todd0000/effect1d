@@ -60,6 +60,11 @@ class Output( widgets.Output ):
     
 
 
+class ResultsTextBox( widgets.Text ):
+    def __init__(self, label):
+        super().__init__(value='(None)', placeholder='', description=label, disabled=True, layout = widgets.Layout(width='200px'))
+
+
 
 class SpinGroupSize( widgets.BoundedIntText ):
     def __init__(self, mgr):

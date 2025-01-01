@@ -51,7 +51,7 @@ class CallbackManager( object ):
     def set_output_widget(self, w):
         self.output_widget  = w
 
-    # def set_results_widget(self, w):
-    #     self.results_widget = w
+    def set_results_widget(self, w):
+        self.results_widget = w
         
         
