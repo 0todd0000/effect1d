@@ -6,6 +6,7 @@ dependencies:
     - xeus-python
     - ipywidgets
     - numpy
+    - scipy
     - pip:
        - rft1d==0.2.3
 
