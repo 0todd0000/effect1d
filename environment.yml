@@ -5,7 +5,7 @@ channels:
 dependencies:
     - xeus-python
     - ipywidgets
-    - numpy
+    - numpy==1.26.4
     - scipy
     - pip:
        - rft1d==0.2.3
