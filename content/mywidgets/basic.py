@@ -67,20 +67,11 @@ class SpinGroupSize( widgets.BoundedIntText ):
 
     def on_value_changed(self, change):
         self.mgr.on_groupsize_changed( change['new'] )
-        # # with out:
-        # #     clear_output()
-        # #     print( "n = ", n)
-        #
-        # fpath = f'img/contours_n={n}.png'
-        # with open(fpath, 'rb') as f:
-        #     img = f.read()
-        # self.image_widget.value = img
-        # # self.mgr.on_groupsize_changed( change['new'] )
 
 
 class SpinFWHM( widgets.BoundedFloatText ):
     def __init__(self, mgr):
-        super().__init__(value=10, min=3, max=80, step=0.1, description='FWHM', disabled=False, layout=widgets.Layout(width='200px'),)
+        super().__init__(value=25, min=3, max=80, step=0.1, description='FWHM', disabled=False, layout=widgets.Layout(width='200px'),)
         self.observe(self.on_value_changed, names='value')
         self.mgr = mgr
 

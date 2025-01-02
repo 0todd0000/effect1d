@@ -19,24 +19,15 @@ class CallbackManager( object ):
     def on_d_changed(self, x):
         self._print('d changed', x)
         self.results_widget.update_d( x )
-        # self.results_widget.set_pvalue( '0.234' )
-        # self.results_widget.set_interpretation( 'Very big da yo' )
 
     def on_fwhm_changed(self, x):
         self._print('FWHM changed', x)
+        self.results_widget.update_fwhm( x )
 
     def on_groupsize_changed(self, n):
         self._print('Group size changed', n)
-        # params  = Effect1DPlotParameters(n=int(n), d=1.0, w=20, dlim=(0.2,5), wlim=(3,50))
-        # self.figure_widget.update(params)
         self.figure_widget.update( n )
-        
-        
-        
-    
-    # def on_wlimits_changed(self, lim):
-    #     x0,x1 = lim
-    #     self._print('FWHM limits changed', x0, x1)
+        self.results_widget.update_n( n )
 
     def set_figure_widget(self, w):
         self.figure_widget  = w
