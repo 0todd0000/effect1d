@@ -35,13 +35,6 @@ class FigureWidget( widgets.Image ):
 
 
 
-
-
-        # w      = widgets.Image(value=img0, format='png', border=None, width=600)
-        
-
-
-
 class Header( widgets.HBox ):
     def __init__(self, label):
         w        = widgets.HTML(value=f'<h3>{label}</h3>', placeholder='', description='')

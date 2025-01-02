@@ -1,10 +1,15 @@
 
 import ipywidgets as widgets
 from . basic import *
+from . prob import Effect1DInterpretationCalculator
 
 
 
-
+class _Params(object):
+    def __init__(self):
+        self.n  = 8
+        self.d  = 1.0
+        self.w  = 25
 
 
 
@@ -22,8 +27,8 @@ class ControlsWidget( widgets.VBox ):
 class ResultsWidget( widgets.VBox ):
     def __init__(self, mgr):
         self.mgr           = mgr
-        self.p             = None
-        self.interp        = None
+        self.calc          = Effect1DInterpretationCalculator()
+        self.params        = _Params()
         w0                 = Header('Results')
         w1                 = ResultsTextBox('p-value')
         w2                 = ResultsTextBox('Interp.')
@@ -31,10 +36,21 @@ class ResultsWidget( widgets.VBox ):
         self.pvalue_widget = w1
         self.interp_widget = w2
         self.mgr.set_results_widget( self )
+        
 
     def set_interpretation(self, s):
         self.interp_widget.value = s
     
     def set_pvalue(self, x):
-        self.p = x
-        self.pvalue_widget.value = str(x)
+        # self.p = x
+        self.pvalue_widget.value = f'{x:.05f}'
+        
+    def update_d(self, x):
+        self.params.d = x
+        res = self.calc.update_params( self.params )
+        self.set_pvalue( res['p'] )
+        self.set_interpretation( res['label'] )
+        
+        
+        
+        
