@@ -11,8 +11,6 @@ class _Params(object):
         self.d  = 1.0
         self.w  = 25
 
-
-
 class ControlsWidget( widgets.VBox ):
     def __init__(self, mgr):
         self.mgr = mgr
@@ -21,8 +19,6 @@ class ControlsWidget( widgets.VBox ):
         w2       = SpinFWHM( mgr )
         w3       = SpinCohensD( mgr )
         super().__init__( [w0, w1, w2, w3] )
-        
-        
 
 class ResultsWidget( widgets.VBox ):
     def __init__(self, mgr):
