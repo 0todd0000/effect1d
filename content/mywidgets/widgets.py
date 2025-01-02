@@ -42,11 +42,11 @@ class ResultsWidget( widgets.VBox ):
         self.pvalue_widget.value = f'{x:.05f}'
         
     def update_d(self, x):
-        self.set_pvalue( 0.123456 )
-        # self.params.d = x
-        # res = self.calc.update_params( self.params )
-        # self.set_pvalue( res['p'] )
-        # self.set_interpretation( res['label'] )
+        # self.set_pvalue( 0.123456 )
+        self.params.d = x
+        res = self.calc.update_params( self.params )
+        self.set_pvalue( res['p'] )
+        self.set_interpretation( res['label'] )
         
         
         
