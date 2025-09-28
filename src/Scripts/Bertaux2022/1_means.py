@@ -15,11 +15,9 @@ def unique_sorted(x):
 
 
 
-# read metadata:
-dirREPO        = pathlib.Path( __file__ ).parent.parent.parent.parent
-dir0           = os.path.join(dirREPO, 'data', 'Bertaux2022')
-
 # load imported data:
+dirREPO = pathlib.Path( __file__ ).parent.parent.parent.parent
+dir0    = os.path.join(dirREPO, 'data', 'Bertaux2022')
 fpathH5 = os.path.join(dir0, 'imported.h5')
 d       = dict()
 with h5py.File(fpathH5, 'r') as f:
