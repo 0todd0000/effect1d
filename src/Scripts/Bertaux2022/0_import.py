@@ -1,4 +1,18 @@
 
+'''
+Import hip flexion data from the Bertaux 2022 ARFF files;
+
+There are six ARFF files containing hip flexion data:
+- HEA_M0_LHipAngles_X.arff  # healthy, left
+- HEA_M0_RHipAngles_X.arff  # healthy, right
+- HOA_M0_LHipAngles_X.arff  # OA patients, left, month 0
+- HOA_M0_RHipAngles_X.arff  # OA patients, right, month 0
+- HOA_M6_LHipAngles_X.arff  # OA patients, left, month 6
+- HOA_M6_RHipAngles_X.arff  # OA patients, right, month 6
+
+This script reads all ARFF files and combines them into a
+single HDF5 file
+'''
 
 import os,pathlib
 import numpy as np
