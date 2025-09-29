@@ -6,59 +6,14 @@ Calculate effect size and its simple and functional interpretations
 import os,pathlib
 import numpy as np
 import matplotlib.pyplot as plt
-import h5py
 import spm1d
-
-
-
-def unique_sorted(x):
-    return np.sort( np.unique(x) )
-
-
-def d2t_onesample(d, n):
-    return d / (1/n)**0.5
-
-def d2p_onesample_0d(d, n):
-    '''
-    Calculate probabilty associated with Cohen's d value for the
-    one-sample (or paired) case with a sample sizes of n
-    '''
-    from collections.abc import Iterable
-    from scipy import stats
-    if isinstance(d, Iterable):
-        return np.array( [d2p_onesample_0d(dd, n)  for dd in d] )
-    t = d2t_onesample(d, n)
-    v = n - 1
-    p = stats.t.sf(t, v)
-    return p
-    
-
-def d2p_onesample_1d(d, n, Q, fwhm):
-    import rft1d
-    v  = n - 1
-    u  = d2t_onesample(d, n)
-    p  = rft1d.t.sf(u, v, Q, fwhm)
-    return p
-
-def p2d_onesample_1d(p, n, Q, fwhm):
-    import rft1d
-    v  = n - 1
-    t  = rft1d.t.isf(p, v, Q, fwhm)
-    d  = t2d_onesample(t, n)
-    return d
-
-def t2d_onesample(t, n):
-    return t * (1/n)**0.5
-
+import effect1d as e1d
 
 
 # load imported data:
 dir0    = os.path.join( os.path.dirname(__file__), 'data' )
 fpathH5 = os.path.join(dir0, 'means.h5')
-d       = dict()
-with h5py.File(fpathH5, 'r') as f:
-    for k in f.keys():
-        d[k] = np.array(f[k])
+d       = e1d.io.load_h5( fpathH5 )
 
 
 
@@ -68,7 +23,7 @@ with h5py.File(fpathH5, 'r') as f:
 # group 2:  OA, month 6 (group=1, sess=1)
 limb   = 1
 y0     = d['y'][  (d['group']==0) & (d['limb']==limb) ]
-oasubj = unique_sorted( d['subj'][(d['affected_limb']==limb) & d['sess']==1] )
+oasubj = e1d.util.unique_sorted( d['subj'][(d['affected_limb']==limb) & d['sess']==1] )
 y1     = np.vstack([d['y'][  (d['subj']==u) & (d['limb']==limb) & (d['sess']==0) ]  for u in oasubj])
 y2     = np.vstack([d['y'][  (d['subj']==u) & (d['limb']==limb) & (d['sess']==1) ]  for u in oasubj])
 
@@ -82,17 +37,17 @@ fwhm   = spm.fwhm
 y     = y2 - y1     # pairwise differences
 n,Q   = y.shape     # sample size, domain size
 d     = y.mean(axis=0) / y.std(ddof=1, axis=0)  # functional Cohen's d value
-t     = d2t_onesample(d, n)  # functional t-value (also calculated above using spm1d.stats.ttest_paired;  this is just a check)
-p0    = d2p_onesample_0d(-d, n)
-p1    = d2p_onesample_1d(-d, n, Q, fwhm)
+t     = e1d.stats.d2t_onesample(d, n)  # functional t-value (also calculated above using spm1d.stats.ttest_paired;  this is just a check)
+p0    = e1d.stats.d2p_onesample_0d(-d, n)
+p1    = e1d.stats.d2p_onesample_1d(-d, n, Q, fwhm)
 
 
 # calculate interpretations:
 labels = ('Very small', 'Small', 'Medium', 'Large', 'Very large', 'Huge')
 dth0   = (0.01, 0.2, 0.5, 0.8, 1.2, 2.0)  # d-value thresholds for 0D case
 nn,ww  = 10, 25   # approximations from recommended guidelines;  see paper for a discussion
-pth    = d2p_onesample_0d( dth0, nn )
-dth1   = p2d_onesample_1d( pth, nn, Q, ww )
+pth    = e1d.stats.d2p_onesample_0d( dth0, nn )
+dth1   = e1d.stats.p2d_onesample_1d( pth, nn, Q, ww )
 
 print( fwhm )
 print( d.min() )

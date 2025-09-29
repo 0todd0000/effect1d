@@ -6,8 +6,8 @@ the provided metadata
 
 import os
 import numpy as np
-import h5py
 import pandas as pd
+import effect1d as e1d
 
 
 
@@ -33,10 +33,11 @@ d0             = dict(group=group, subj=subj, m6=m6, affected_limb=affected_limb
 
 # load imported data:
 fpathH5 = os.path.join(dir0, 'imported.h5')
-d1      = dict()
-with h5py.File(fpathH5, 'r') as f:
-    for k in f.keys():
-        d1[k]  = np.array(f[k])
+d1      = e1d.io.load_h5( fpathH5 )
+# d1      = dict()
+# with h5py.File(fpathH5, 'r') as f:
+#     for k in f.keys():
+#         d1[k]  = np.array(f[k])
 
 
 

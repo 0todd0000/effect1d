@@ -5,12 +5,7 @@ Calculate within-subject means for between-subject analysis
 
 import os
 import numpy as np
-import h5py
-
-
-
-def unique_sorted(x):
-    return np.sort( np.unique(x) )
+import effect1d as e1d
 
 
 
@@ -18,15 +13,12 @@ def unique_sorted(x):
 # load imported data:
 dir0    = os.path.join( os.path.dirname(__file__), 'data' )
 fpathH5 = os.path.join(dir0, 'imported.h5')
-d       = dict()
-with h5py.File(fpathH5, 'r') as f:
-    for k in f.keys():
-        d[k] = np.array(f[k])
+d       = e1d.io.load_h5( fpathH5 )
 
 
 
 # calculate means:
-usubj   = unique_sorted( d['subj'] )
+usubj   = e1d.util.unique_sorted( d['subj'] )
 m       = []
 subj    = []
 group   = []
@@ -53,9 +45,7 @@ subj,sess,limb,group,aff = [np.asarray(x)  for x in (subj,sess,limb,group,aff)]
 # save means:
 d      = dict(y=m, subj=subj, sess=sess, limb=limb, group=group, affected_limb=aff)
 fpath1 = os.path.join(dir0, 'means.h5')
-with h5py.File(fpath1, 'w') as f:
-    for key in d.keys():
-        f.create_dataset( key, data=d[key], compression='gzip', compression_opts=9 )
+e1d.io.save_h5(fpath1, d)
 
 
 

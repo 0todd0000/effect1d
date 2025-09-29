@@ -16,7 +16,7 @@ single HDF5 file
 
 import os
 import numpy as np
-import h5py
+import effect1d as e1d
 
 
 
@@ -99,15 +99,13 @@ d       = stack_dictionaries( *dicts )
 
 # save imported data:
 fpathH5 = os.path.join(dir0, 'imported.h5')
-with h5py.File(fpathH5, 'w') as f:
-    for key in d.keys():
-        f.create_dataset( key, data=d[key], compression='gzip', compression_opts=9 )
+e1d.io.save_h5(fpathH5, d)
 
 
 # check that data have been saved correctly:
-with h5py.File(fpathH5, 'r') as f:
-    y1 = np.array(f['y'])
-print( 'Saved data saved correctly: ', np.all( d['y']==y1 ) )
+d1 = e1d.io.load_h5(fpathH5)
+eq = [np.all( d[k]==d1[k] )  for k in d.keys()]
+print( 'Saved data saved correctly: ', np.all( eq ) )
 
 
 
