@@ -3,7 +3,7 @@
 Calculate within-subject means for between-subject analysis
 '''
 
-import os,pathlib
+import os
 import numpy as np
 import h5py
 
@@ -16,8 +16,7 @@ def unique_sorted(x):
 
 
 # load imported data:
-dirREPO = pathlib.Path( __file__ ).parent.parent.parent.parent
-dir0    = os.path.join(dirREPO, 'data', 'Bertaux2022')
+dir0    = os.path.join( os.path.dirname(__file__), 'data' )
 fpathH5 = os.path.join(dir0, 'imported.h5')
 d       = dict()
 with h5py.File(fpathH5, 'r') as f:

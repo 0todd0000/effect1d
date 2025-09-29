@@ -4,7 +4,7 @@ Check correspondence between imported (parsed) data and
 the provided metadata
 '''
 
-import os,pathlib
+import os
 import numpy as np
 import h5py
 import pandas as pd
@@ -18,8 +18,7 @@ def unique_sorted(x):
 
 
 # read metadata:
-dirREPO        = pathlib.Path( __file__ ).parent.parent.parent.parent
-dir0           = os.path.join(dirREPO, 'data', 'Bertaux2022')
+dir0           = os.path.join( os.path.dirname(__file__), 'data' )
 fpathCSV       = os.path.join(dir0, 'metadata.csv') 
 df             = pd.read_csv( fpathCSV )
 labels_groups  = ['HEA', 'HOA']

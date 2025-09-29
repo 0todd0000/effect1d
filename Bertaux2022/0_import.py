@@ -14,7 +14,7 @@ This script reads all ARFF files and combines them into a
 single HDF5 file
 '''
 
-import os,pathlib
+import os
 import numpy as np
 import h5py
 
@@ -84,8 +84,7 @@ def stack_dictionaries( *args ):
 
 
 # read data files:
-dirREPO = pathlib.Path( __file__ ).parent.parent.parent.parent
-dir0    = os.path.join(dirREPO, 'data', 'Bertaux2022')
+dir0    = os.path.join( os.path.dirname(__file__), 'data' )
 fname0  = 'HEA_M0_LHipAngles_X.arff'
 fname1  = 'HEA_M0_RHipAngles_X.arff'
 fname2  = 'HOA_M0_LHipAngles_X.arff'
@@ -108,7 +107,7 @@ with h5py.File(fpathH5, 'w') as f:
 # check that data have been saved correctly:
 with h5py.File(fpathH5, 'r') as f:
     y1 = np.array(f['y'])
-print( np.all( d['y']==y1 ) )
+print( 'Saved data saved correctly: ', np.all( d['y']==y1 ) )
 
 
 
